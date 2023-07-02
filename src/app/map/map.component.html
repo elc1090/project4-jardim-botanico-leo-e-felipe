@@ -1,5 +1,12 @@
-<div class="map-container">
-  <div class="map-frame">
-    <div id="map"></div>
-  </div>
+<div class="row g-3 controls">
+    <div class="col-auto">
+        <select class="form-select form-select-sm" [ngModel]="trilhaSelected" (ngModelChange)="onChange($event)">
+            <option [value]="i" *ngFor="let i of trilhas">{{i}}</option>
+        </select>
+    </div>
+    <div class="col-auto" *ngIf="trilhaSelected">
+      <button class="btn btn-primary mb-3" (click)="mostrarTrilha()">Mostrar Trilha</button>
+    </div>
 </div>
+
+<div id="map"></div>
