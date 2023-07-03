@@ -1,6 +1,7 @@
 <div class="row g-3 controls">
     <div class="col-auto">
         <select class="form-select form-select-sm" [ngModel]="trilhaSelected" (ngModelChange)="onChange($event)">
+            <option [value]="undefined" selected>Selecione uma Trilha</option>
             <option [value]="i" *ngFor="let i of trilhas">{{i}}</option>
         </select>
     </div>
