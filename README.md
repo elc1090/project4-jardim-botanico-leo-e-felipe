@@ -16,7 +16,7 @@ Implementação de um aplicativo web para auxiliar em visitas autoguiadas ao jar
 
 ### Deploy
 
-Preencha aqui a URL para acesso ao projeto publicado
+https://project4-jardim-botanico-98822addbcc7.herokuapp.com/
 
 ### Testes
 
