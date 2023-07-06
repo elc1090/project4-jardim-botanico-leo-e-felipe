@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
+import * as geojson from 'geojson';
 
 @Component({
   selector: 'app-map',
@@ -11,8 +12,9 @@ export class MapComponent implements AfterViewInit {
 
   markers: any = [];
   trilhaSelected: any;
-  trilhas = ['Trilha 1','Trilha 2'];
+  trilhas = ['Trilha do Bambu','Trilha da Mata'];
   pontos: any[] = [];
+  caminho: any;
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -35,7 +37,7 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap()
-    this.buildPontos()  
+    this.buildPontos()    
   }
 
   buildPontos() {
@@ -87,7 +89,8 @@ export class MapComponent implements AfterViewInit {
   removeMarkers() {
     for (var id in this.markers) {
       this.map.removeLayer(this.markers[id]);
-    }
+      this.map.removeLayer(this.caminho);  
+    }    
     this.markers = []
   }
 
@@ -97,12 +100,14 @@ export class MapComponent implements AfterViewInit {
 
   mostrarTrilha() {
     this.removeMarkers();
-    if (this.trilhaSelected == 'Trilha 1') {
+    if (this.trilhaSelected == 'Trilha do Bambu') {
       let trilha = this.pontos.filter(p => p.id == 1 ||  p.id == 9 || p.id == 14 );
       trilha.forEach(t => this.addMarker(t.lat, t.lng, t.msg));
-    } else if (this.trilhaSelected == 'Trilha 2') {
+      this.caminho = L.polyline(trilha, {color: 'red'}).addTo(this.map);
+    } else if (this.trilhaSelected == 'Trilha da Mata') {
       let trilha = this.pontos.filter(p => p.id == 1 ||  p.id == 7 || p.id == 8 || p.id == 9 || p.id == 10);
       trilha.forEach(t => this.addMarker(t.lat, t.lng, t.msg));
+      this.caminho = L.polyline(trilha, {color: 'red'}).addTo(this.map);
     }
   }
 
